@@ -50,7 +50,7 @@ def handler(*args, **kwargs):
     if new_events:
         send_notification(subject="New Parkruns Found!", message="\n".join(new_events))
 
-    Events.save(uk_events)
+        Events.save(uk_events)
 
 
 if __name__ == "__main__":
