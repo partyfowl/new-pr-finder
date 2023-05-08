@@ -1,0 +1,4 @@
+new-parkruns:
+  subscription1: user@example.org
+errors:
+  subscription1: admin@example.org
