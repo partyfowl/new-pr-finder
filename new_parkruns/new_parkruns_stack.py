@@ -44,7 +44,7 @@ class NewParkrunsStack(Stack):
             evaluation_periods=1,
         ).add_alarm_action(SnsAction(alarm_topic))
 
-        Rule(self, "CronJob", schedule=Schedule.cron(minute="0", hour="19")).add_target(
+        Rule(self, "CronJob", schedule=Schedule.cron(minute="0/5")).add_target(
             LambdaFunction(function)
         )
 
