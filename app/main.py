@@ -5,6 +5,8 @@ import os
 
 s3 = boto3.resource("s3")
 
+UK_EVENT_URL = "https://www.parkrun.org.uk/{url_path}/course/"
+
 
 class Events:
     object = s3.Object(os.environ["S3_BUCKET"], os.environ["S3_KEY"])
@@ -34,22 +36,21 @@ def handler(*args, **kwargs):
 
     existing = Events.load()
 
-    uk_events = [
-        _["properties"]["EventLongName"]
+    uk_events = {
+        _["properties"]["EventLongName"]: _["properties"]["eventname"]
         for _ in events["events"]["features"]
         if _["properties"]["countrycode"] == 97
         and not _["properties"]["eventname"].endswith("-juniors")
-    ]
+    }
 
     new_events = []
 
-    for event in uk_events:
+    for event, url_path in uk_events.items():
         if event not in existing:
-            new_events.append(event)
+            new_events.append(f"{event}: {UK_EVENT_URL.format(url_path=url_path)}")
 
     if new_events:
         send_notification(subject="New Parkruns Found!", message="\n".join(new_events))
-
         Events.save(uk_events)
 
 
