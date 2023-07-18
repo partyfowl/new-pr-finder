@@ -1,4 +1,4 @@
-from aws_cdk import BundlingOptions, DockerImage, Stack
+from aws_cdk import BundlingOptions, DockerImage, Stack, Duration
 from aws_cdk.aws_cloudwatch_actions import SnsAction
 from aws_cdk.aws_events import Rule, Schedule
 from aws_cdk.aws_events_targets import LambdaFunction
@@ -23,12 +23,11 @@ class NewParkrunsStack(Stack):
             "NewParkrunNotifier",
             handler="main.handler",
             runtime=Runtime.PYTHON_3_10,
+            timeout=Duration.seconds(10),
             code=Code.from_asset(
                 "./app",
                 bundling=BundlingOptions(
-                    image=DockerImage(
-                        "public.ecr.aws/lambda/python:3.10.2023.05.07.17"
-                    ),
+                    image=DockerImage("public.ecr.aws/lambda/python:3.11"),
                     command=[
                         "pip install -r requirements.txt -t /asset-output/ && cp main.py /asset-output/"
                     ],
