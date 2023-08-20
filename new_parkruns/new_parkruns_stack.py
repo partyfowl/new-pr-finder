@@ -22,7 +22,7 @@ class NewParkrunsStack(Stack):
             self,
             "NewParkrunNotifier",
             handler="main.handler",
-            runtime=Runtime.PYTHON_3_10,
+            runtime=Runtime.PYTHON_3_11,
             timeout=Duration.seconds(10),
             code=Code.from_asset(
                 "./app",
