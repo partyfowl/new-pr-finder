@@ -14,7 +14,7 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - run: npm install aws-cdk
+      - run: npm install aws-cdk@2.78.0 -g
 
       - run: cdk synth
         env:
