@@ -9,4 +9,4 @@
 
 ## Subscriptions
 
- - Subscriptions to the topics can be made by creating and adding entries to `subscriptions.yaml`, an example of which can be seen in [subscriptions.example.yaml](subscriptions.yaml.example)
+ - Subscriptions to the topics can be made by creating and adding entries to `subscriptions.yaml`, an example of which can be seen in [subscriptions.example.yaml](subscriptions.example.yaml)
